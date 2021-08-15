@@ -5,6 +5,15 @@ export const schema = buildSchema(`
   type Query {
       mood: String
       allTaps: [Tap]
+      tap(id: Int!): Tap
+      user(username: String!): User
+  }
+
+  type User {
+      id: Int
+      username: String
+      password: String
+      admin: Boolean
   }
 
   type Tap {
@@ -27,10 +36,16 @@ export const root = {
     },
     allTaps: async () => {
         const r = await query("select * from ontap");
-        console.log(r);
         return r;
+    },
+    tap: async (args) => {
+        const r = await query("select * from ontap where id = ?", [args.id]);
+        return r[0];
+    },
+    user: async (args) => {
+        const r = await query("select * from users where username = ?", [args.username]);
+        return r[0];
     }
-
 };
 
 export default {
