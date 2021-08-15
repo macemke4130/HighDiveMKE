@@ -1,5 +1,9 @@
+drop schema highdive;
 CREATE SCHEMA `highdive`;
 use highdive;
+
+create user 'hdmke_user'@'localhost' identified by 'root';
+GRANT ALL ON highdive.* TO 'hdmke_user'@'localhost';
 
 drop table users;
 create table users (
