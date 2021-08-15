@@ -1,0 +1,29 @@
+# Still To Do
+- Are you over 21?
+- What should I drink?
+    - Chooses drink for you
+    - Spin again
+    - Chooses from specials and mojitos and taps
+- Database
+    - Users
+        - Username
+        - Password
+        - Admin
+    - On Tap
+        - Id
+        - Active
+        - Name
+        - Brewer
+        - Price
+        - Size - Nullable
+        - ABV - Nullable
+        - IBU - Nullable
+        - Description - Nullable
+    - Events
+        - Id
+        - Title
+        - Description
+        - Date
+        - Time
+        - Price
+        - Link
