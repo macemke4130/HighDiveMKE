@@ -9,10 +9,10 @@ const admin = async () => {
         console.log(r);
         if (r.user.username === username) {
             // Success
-            const jwt = await gql(`{ jwt(payload: "${username}") { token }}`, "admin");
-            console.log(jwt);
-            if (jwt) {
-                localStorage.setItem("Token", jwt);
+            const r = await gql(`{ jwt(payload: "${username}") { token }}`, "admin");
+            console.log(r.jwt.token);
+            if (r) {
+                localStorage.setItem("Token", r.jwt.token);
                 // window.location.href = "./panel.html";
             }
         }

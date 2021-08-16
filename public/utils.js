@@ -16,10 +16,8 @@ export const gql = async (ask, path = "public") => {
 }
 
 export const auth = async () => {
-    const bodyObject = {
-        token: localStorage.getItem("Token")
-    };
-    const r = await apiService("/auth", "POST", bodyObject);
+    const token = localStorage.getItem("Token");
+    const r = await gql(`{auth(token: "${token}") {}}`);
     
     if (r.data === "jwt expired") {
         localStorage.removeItem("Token");

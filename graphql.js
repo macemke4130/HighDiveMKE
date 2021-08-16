@@ -12,6 +12,7 @@ export const schema = buildSchema(`
       tap(id: Int!): Tap
       user(username: String!, password: String!): User
       jwt(payload: String!): JWT
+      auth(token: String!): Boolean
   }
 
   type JWT {
@@ -68,13 +69,24 @@ export const root = {
         }
     },
     jwt: async (args) => {
-        // Create JWT --
+        // Create and return JWT object--
         const username = args.payload;
         const token = await jsonwebtoken.default.sign({ data: username }, privateKey, { expiresIn: '1d' });
         const jwtObject = {
             token
         };
         return jwtObject;
+    },
+    auth: async (args) => {
+        const token = args.token;
+        const auth = await jsonwebtoken.default.verify(token, privateKey, function(err, decoded) {
+            if (err) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+        return auth;
     }
 };
 

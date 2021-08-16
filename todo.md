@@ -1,5 +1,6 @@
 # Still To Do
 - Are you over 21?
+- Background is black because bars are dark
 - What should I drink?
     - Chooses drink for you
     - Spin again
