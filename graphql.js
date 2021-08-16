@@ -15,12 +15,6 @@ export const schema = buildSchema(`
       auth(token: String!): AuthObject
   }
 
-  type UserObject {
-      id: Int
-      username: String
-      admin: Boolean
-  }
-
   type AuthObject {
       valid: Boolean
       id: Int
@@ -83,7 +77,7 @@ export const root = {
         }
     },
     jwt: async (args) => {
-        // Create and return JWT object--
+        // Create and returns JWT object--
         const userObject = {
             id: args.id,
             username: args.username,
@@ -96,6 +90,7 @@ export const root = {
         return jwtObject;
     },
     auth: async (args) => {
+        // Creates and returns an authObject for the front end --
         let authObject = {};
         const token = args.token;
         const auth = await jsonwebtoken.default.verify(token, privateKey, function (err, decoded) {

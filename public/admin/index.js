@@ -9,12 +9,11 @@ const admin = async (e) => {
 
     try {
         const r = await gql(`{user (username: "${username}", password: "${password}") {id, username, admin}}`, "admin");
-        console.log(r);
+
         if (r.user.username === username) {
             // Successful Login --
             const jwt = await gql(`{ jwt(username: "${r.user.username}", id: ${r.user.id}, admin: ${r.user.admin}) { token }}`, "admin");
             localStorage.setItem("Token", jwt.jwt.token);
-            console.log(jwt.jwt.token);
             window.location.href = "./edittaps.html";
         }
     } catch (e) {

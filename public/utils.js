@@ -31,6 +31,6 @@ export const auth = async () => {
         username: r.auth.username,
         admin: r.auth.admin
     }
-    console.log("Authorized");
+
     return authObject;
 }
