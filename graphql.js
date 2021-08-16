@@ -6,7 +6,7 @@ export const schema = buildSchema(`
       mood: String
       allTaps: [Tap]
       tap(id: Int!): Tap
-      user(username: String!): User
+      user(username: String!, password: String!): User
   }
 
   type User {
@@ -43,8 +43,20 @@ export const root = {
         return r[0];
     },
     user: async (args) => {
+        // Authentication --
         const r = await query("select * from users where username = ?", [args.username]);
-        return r[0];
+        const inputPassword = args.password;
+
+        // Needs encryption --
+        const dbPassword = r[0].password;
+
+        if (inputPassword === dbPassword) {
+            // Success --
+            return r[0];
+        } else {
+            // Denied --
+            return null;
+        }
     }
 };
 
