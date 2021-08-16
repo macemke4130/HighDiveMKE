@@ -17,13 +17,20 @@ export const gql = async (ask, path = "public") => {
 
 export const auth = async () => {
     const token = localStorage.getItem("Token");
-    const r = await gql(`{ auth(token: "${token}") }`, "admin");
+    const r = await gql(`{ auth(token: "${token}"){ valid, id, username, admin } }`, "admin");
     
-    if (r.auth === false) {
+    if (r.auth.valid === false) {
         console.log(false)
         localStorage.removeItem("Token");
         window.location.href = "../";
         return;
     }
+
+    const authObject = {
+        id: r.auth.id,
+        username: r.auth.username,
+        admin: r.auth.admin
+    }
     console.log("Authorized");
+    return authObject;
 }

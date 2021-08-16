@@ -1,6 +1,7 @@
 # Still To Do
 - Are you over 21?
 - Background is black because bars are dark
+- auth() function returns the user and the id and their admin access?
 - What should I drink?
     - Chooses drink for you
     - Spin again

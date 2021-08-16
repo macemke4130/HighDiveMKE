@@ -11,8 +11,21 @@ export const schema = buildSchema(`
       allTaps: [Tap]
       tap(id: Int!): Tap
       user(username: String!, password: String!): User
-      jwt(payload: String!): JWT
-      auth(token: String!): Boolean
+      jwt(username: String!, id: Int!, admin: Boolean!): JWT
+      auth(token: String!): AuthObject
+  }
+
+  type UserObject {
+      id: Int
+      username: String
+      admin: Boolean
+  }
+
+  type AuthObject {
+      valid: Boolean
+      id: Int
+      username: String
+      admin: Boolean
   }
 
   type JWT {
@@ -54,6 +67,7 @@ export const root = {
     },
     user: async (args) => {
         // Authentication --
+        console.log(args)
         const r = await query("select * from users where username = ?", [args.username]);
         const inputPassword = args.password;
 
@@ -70,23 +84,38 @@ export const root = {
     },
     jwt: async (args) => {
         // Create and return JWT object--
-        const username = args.payload;
-        const token = await jsonwebtoken.default.sign({ data: username }, privateKey, { expiresIn: '1d' });
+        const userObject = {
+            id: args.id,
+            username: args.username,
+            admin: args.admin
+        };
+        const token = await jsonwebtoken.default.sign({ data: userObject }, privateKey, { expiresIn: '1d' });
         const jwtObject = {
             token
         };
         return jwtObject;
     },
     auth: async (args) => {
+        let authObject = {};
         const token = args.token;
-        const auth = await jsonwebtoken.default.verify(token, privateKey, function(err, decoded) {
+        const auth = await jsonwebtoken.default.verify(token, privateKey, function (err, decoded) {
             if (err) {
-                return false;
+                authObject = {
+                    valid: false,
+                    id: null,
+                    username: null,
+                    admin: false
+                };
             } else {
-                return true;
+                authObject = {
+                    valid: true,
+                    id: decoded.data.id,
+                    username: decoded.data.username,
+                    admin: decoded.data.admin
+                };
             }
         });
-        return auth;
+        return authObject;
     }
 };
 

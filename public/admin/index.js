@@ -3,16 +3,18 @@ import { gql } from "../utils.js";
 const admin = async (e) => {
     // Prevent Form Page Refresh --
     e.preventDefault();
-    
+
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
     try {
-        const r = await gql(`{user (username: "${username}", password: "${password}") {id, username}}`, "admin");
+        const r = await gql(`{user (username: "${username}", password: "${password}") {id, username, admin}}`, "admin");
+        console.log(r);
         if (r.user.username === username) {
             // Successful Login --
-            const r = await gql(`{ jwt(payload: "${username}") { token }}`, "admin");
-            localStorage.setItem("Token", r.jwt.token);
+            const jwt = await gql(`{ jwt(username: "${r.user.username}", id: ${r.user.id}, admin: ${r.user.admin}) { token }}`, "admin");
+            localStorage.setItem("Token", jwt.jwt.token);
+            console.log(jwt.jwt.token);
             window.location.href = "./edittaps.html";
         }
     } catch (e) {

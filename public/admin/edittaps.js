@@ -1,2 +1,8 @@
 import { gql, auth } from "../utils.js";
-auth();
+
+let whoIs;
+const loggedIn = async () => {
+    whoIs = await auth();
+    console.log(whoIs);
+}
+loggedIn();
