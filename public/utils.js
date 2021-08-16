@@ -15,43 +15,6 @@ export const gql = async (ask, path = "public") => {
     }
 }
 
-export const apiService = async (uri, method = "GET", body) => {
-    const headers = {};
-    const options = {
-        method,
-        headers
-    };
-
-    if (method === "POST" || method === "PUT") {
-        headers['Content-Type'] = 'application/json';
-        options.body = JSON.stringify(body);
-    }
-
-    try {
-        const res = await fetch(uri, options);
-
-        if (res.status === 404) {
-            throw new Error("Check URI and Server Path.");
-        }
-
-        if (res.status === 401) {
-            localStorage.removeItem('token');
-            localStorage.setItem('isAuth', 'false');
-            throw new Error("Check Local Storage or Server Endpoint.");
-        }
-
-        if (res.status === 500) {
-            throw new Error("Check Server Terminal.");
-        }
-
-        if (res.ok) {
-            return await res.json();
-        }
-    } catch (e) {
-        console.error(e);
-    }
-};
-
 export const auth = async () => {
     const bodyObject = {
         token: localStorage.getItem("Token")
