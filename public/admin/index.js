@@ -9,14 +9,11 @@ const admin = async () => {
         console.log(r);
         if (r.user.username === username) {
             // Success
-            const bodyObject = {
-                name: username
-            };
-            const jwt = await apiService("/jwt", "POST", bodyObject);
+            const jwt = await gql(`{jwt (payload: "${username}")}`, "admin");
             console.log(jwt);
             if (jwt) {
                 localStorage.setItem("Token", jwt);
-                window.location.href = "./panel.html";
+                // window.location.href = "./panel.html";
             }
         }
     } catch (e) {

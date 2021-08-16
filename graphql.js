@@ -1,5 +1,9 @@
 import { buildSchema } from 'graphql';
 import { query } from "./dbconnect.js";
+import * as jsonwebtoken from 'jsonwebtoken';
+import config from './config/index.js';
+
+const privateKey = config.keys.jwt;
 
 export const schema = buildSchema(`
   type Query {
@@ -7,6 +11,11 @@ export const schema = buildSchema(`
       allTaps: [Tap]
       tap(id: Int!): Tap
       user(username: String!, password: String!): User
+      jwt(payload: String!): JWT
+  }
+
+  type JWT {
+      token: String
   }
 
   type User {
@@ -57,6 +66,15 @@ export const root = {
             // Denied --
             return null;
         }
+    },
+    jwt: async (args) => {
+        // Create JWT --
+        const username = args.payload;
+        const token = await jsonwebtoken.default.sign({ data: username }, privateKey, { expiresIn: '1d' });
+        const jwtObject = {
+            token
+        };
+        return jwtObject;
     }
 };
 
