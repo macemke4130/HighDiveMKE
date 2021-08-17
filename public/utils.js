@@ -3,6 +3,7 @@ export const gql = async (ask, path = "public") => {
     let method = "POST";
     let headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
     let body = JSON.stringify({ query });
+    console.log(body);
     
     const graphqlPath = (path === "admin") ? "../graphql" : "./graphql";
 

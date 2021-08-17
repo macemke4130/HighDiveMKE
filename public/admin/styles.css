@@ -93,7 +93,7 @@ button {
     padding: 1em;
 }
 
-#newtap {
+#newtap, #edittap {
     display: flex;
     flex-direction: column;
     align-items: center;

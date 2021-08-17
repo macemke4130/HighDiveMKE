@@ -49,7 +49,7 @@ const app = async () => {
         
         // Create Edit Link -- 
         let editLink = document.createElement("a");
-        editLink.href = "./edit.html?id=" + allTaps[i].id;
+        editLink.href = "./edittap.html?id=" + allTaps[i].id;
         editLink.appendChild(editButton);
         controls.appendChild(editLink);
 

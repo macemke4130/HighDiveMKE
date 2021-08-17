@@ -2,25 +2,13 @@
 - Are you over 21?
 - Background is black because bars are dark
 - Homepage Takeover option to takeover tap list
+- Admin
+    - Styles for login
 - What should I drink?
     - Chooses drink for you
     - Spin again
     - Chooses from specials and mojitos and taps
 - Database
-    - Users
-        - Username
-        - Password
-        - Admin
-    - On Tap
-        - Id
-        - Active
-        - Name
-        - Brewer
-        - Price
-        - Size - Nullable
-        - ABV - Nullable
-        - IBU - Nullable
-        - Description - Nullable
     - Events
         - Id
         - Title
