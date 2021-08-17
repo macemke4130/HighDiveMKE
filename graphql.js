@@ -69,7 +69,7 @@ export const root = {
     },
     allTaps: async (args) => {
         if (args.admin) {
-            const r = await query("select * from ontap order by active desc");
+            const r = await query("select * from ontap order by active desc, tapname asc");
             return r;
         } else {
             const r = await query("select * from ontap where active = 1");

@@ -8,7 +8,7 @@ const active = params.split("active=")[1];
 let whoIs;
 const loggedIn = async () => {
     whoIs = await auth();
-    activate();
+    if(whoIs) activate();
 }
 
 const activate = async () => {

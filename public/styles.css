@@ -12,12 +12,12 @@ h1 {
     display: none;
 }
 
-h2 {
+h1, h2 {
     font-family: 'Recursive', sans-serif;
     margin-top: 0.5em;
 }
 
-header p {
+h1, h2, header p {
     font-family: 'Recursive', sans-serif;
     font-size: 1.5em;
     text-shadow: 0 0 0.1em black, 0 0 0.1em black, 0 0 0.1em black;
@@ -70,9 +70,13 @@ nav a:hover {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid white;
+
+    transition-timing-function: ease-in-out;
+    transition-duration: 500ms;
 }
 
 .logo {
+    display: block;
     height: 50%;
     -webkit-filter: drop-shadow(2px 2px 0 white) drop-shadow(-2px -2px 0 white);
     filter: drop-shadow(2px 2px 0 white) drop-shadow(-2px -2px 0 white);
@@ -129,3 +133,25 @@ footer {
     position: absolute;
     bottom: 0;
 }
+
+@media only screen and (max-width: 730px) {
+    header p {
+        font-size: 1em;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    h1 {
+        display: block;
+    }
+
+    .hero-image {
+        height: 25vh;
+    }
+
+    nav a {
+        font-size: 0.75em;
+    }
+  }
