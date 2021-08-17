@@ -29,8 +29,18 @@ const app = async () => {
 
         // Create Controls Div --
         let controls = document.createElement("div");
-        controls.classname = "controls";
+        controls.className = "controls";
         tapRow.appendChild(controls);
+
+        // Create Activate Button --
+        let activeateButton = document.createElement("button");
+        activeateButton.innerText = allTaps[i].active ? "Deactivate" : "Activate";
+        
+        // Create Activate Link -- 
+        let activateLink = document.createElement("a");
+        activateLink.href = allTaps[i].active ? "./deactivate.html?id=" + allTaps[i].id : "./activate.html?id=" + allTaps[i].id;
+        activateLink.appendChild(activeateButton);
+        controls.appendChild(activateLink);
 
         // Create Edit Button --
         let editButton = document.createElement("button");
@@ -40,9 +50,9 @@ const app = async () => {
         let editLink = document.createElement("a");
         editLink.href = "./edit.html?id=" + allTaps[i].id;
         editLink.appendChild(editButton);
-        tapRow.appendChild(editLink);
+        controls.appendChild(editLink);
 
-
+        tapRow.appendChild(controls);
         main.appendChild(tapRow);
     }
 }
