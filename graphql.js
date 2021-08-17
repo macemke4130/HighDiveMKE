@@ -135,7 +135,6 @@ export const root = {
     // Mutations
     editTap: async (args) => {
         const r = await query("update ontap set ? where id = ?", [args, args.id]);
-        console.log(r);
         return r;
     }
 };

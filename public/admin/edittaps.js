@@ -38,7 +38,8 @@ const app = async () => {
         
         // Create Activate Link -- 
         let activateLink = document.createElement("a");
-        activateLink.href = allTaps[i].active ? "./deactivate.html?id=" + allTaps[i].id : "./activate.html?id=" + allTaps[i].id;
+        const activatePath = "./activate.html?id=" + allTaps[i].id;
+        activateLink.href = allTaps[i].active ? activatePath + "&active=false" : activatePath + "&active=true";
         activateLink.appendChild(activeateButton);
         controls.appendChild(activateLink);
 

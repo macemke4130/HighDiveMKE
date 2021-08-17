@@ -1,8 +1,9 @@
 import { gql, auth } from "../utils.js";
 
 const params = window.location.search;
-const paramsList = params.split("=");
-const id = paramsList[1];
+const paramsList = params.split("id=");
+const id = paramsList[1].split("&")[0];
+const active = params.split("active=")[1];
 
 let whoIs;
 const loggedIn = async () => {
@@ -11,7 +12,7 @@ const loggedIn = async () => {
 }
 
 const activate = async () => {
-    const r = await gql(`mutation { editTap (id: ${id}, active: true) { affectedRows } }`, "admin");
+    const r = await gql(`mutation { editTap (id: ${id}, active: ${active}) { affectedRows } }`, "admin");
     if (r) window.location.href = "./edittaps.html";
 }
 
