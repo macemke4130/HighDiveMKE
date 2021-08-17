@@ -17,6 +17,7 @@ export const schema = buildSchema(`
 
   type Mutation {
       newTap(active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
+      editTap(id: Int!, active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
   }
 
   type mysqlResponse {
@@ -68,7 +69,7 @@ export const root = {
     },
     allTaps: async (args) => {
         if (args.admin) {
-            const r = await query("select * from ontap");
+            const r = await query("select * from ontap order by active desc");
             return r;
         } else {
             const r = await query("select * from ontap where active = 1");
