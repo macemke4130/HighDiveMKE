@@ -8,12 +8,28 @@ const privateKey = config.keys.jwt;
 export const schema = buildSchema(`
   type Query {
       mood: String
-      allTaps: [Tap]
+      allTaps(admin: Boolean): [Tap]
       tap(id: Int!): Tap
       user(username: String!, password: String!): User
       jwt(username: String!, id: Int!, admin: Boolean!): JWT
       auth(token: String!): AuthObject
   }
+
+  type Mutation {
+      newTap(active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
+  }
+
+  type mysqlResponse {
+    fieldCount: Int
+    afffieldCount: Int
+    affectedRows: Int
+    insertId: Int
+    serverStatus: Int
+    warningCount: Int
+    message: String
+    protocol41: Boolean
+    changedRows: Int
+}
 
   type AuthObject {
       valid: Boolean
@@ -38,11 +54,10 @@ export const schema = buildSchema(`
       active: Boolean
       tapname: String
       brewer: String
-      price: Float
+      price: String
       size: Int
       abv: Float
       ibu: Int
-      description: String
       created: String
   }
 `);
@@ -51,9 +66,14 @@ export const root = {
     mood: () => {
         return "Bottoms Up."
     },
-    allTaps: async () => {
-        const r = await query("select * from ontap");
-        return r;
+    allTaps: async (args) => {
+        if (args.admin) {
+            const r = await query("select * from ontap");
+            return r;
+        } else {
+            const r = await query("select * from ontap where active = 1");
+            return r;
+        }
     },
     tap: async (args) => {
         const r = await query("select * from ontap where id = ?", [args.id]);

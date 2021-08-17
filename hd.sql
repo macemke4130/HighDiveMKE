@@ -1,4 +1,3 @@
-drop schema highdive;
 CREATE SCHEMA `highdive`;
 use highdive;
 
@@ -23,15 +22,17 @@ create table ontap (
     active bool not null,
     tapname varchar(64) not null,
     brewer varchar(64) not null,
-    price decimal(3, 2) not null,
+    price varchar(10) not null,
     size tinyInt,
     abv decimal(3, 2),
     ibu int,
-    description varchar(1000),
     created timestamp default now()
 );
-insert into ontap (active, tapname, brewer, price, abv, ibu, description) values (
-1, "Riverwest Stein", "Lakefront Brewery", 5.50, 6, 24, "Medium-light body with a dash of caramel malt sweetness that’s quickly curbed by pleasing hop notes and crisp, lager finish."
+insert into ontap (active, tapname, brewer, price, abv, ibu) values (
+1, "Riverwest Stein", "Lakefront Brewery", "5.50", 6, 24
+);
+insert into ontap (active, tapname, brewer, price, abv, ibu) values (
+1, "Fixed Gear", "Lakefront Brewery", "5", 6.5, 54
 );
 select * from ontap;
 
