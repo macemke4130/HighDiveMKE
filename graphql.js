@@ -17,7 +17,7 @@ export const schema = buildSchema(`
 
   type Mutation {
       newTap(active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
-      editTap(id: Int!, active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
+      editTap(id: Int!, active: Boolean!, tapname: String, brewer: String, price: String, size: Int, abv: Float, ibu: Int): mysqlResponse
   }
 
   type mysqlResponse {
@@ -82,7 +82,6 @@ export const root = {
     },
     user: async (args) => {
         // Authentication --
-        console.log(args)
         const r = await query("select * from users where username = ?", [args.username]);
         const inputPassword = args.password;
 
@@ -132,6 +131,12 @@ export const root = {
             }
         });
         return authObject;
+    },
+    // Mutations
+    editTap: async (args) => {
+        const r = await query("update ontap set ? where id = ?", [args, args.id]);
+        console.log(r);
+        return r;
     }
 };
 
