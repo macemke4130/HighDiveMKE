@@ -4,6 +4,12 @@
     color: white;
 }
 
+input, select, option {
+    color: black;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
 body {
     background-color: black;
 }
@@ -39,7 +45,7 @@ main {
     align-items: center;
 }
 
-p, a {
+p, a, label {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -80,13 +86,16 @@ p, a {
     margin-left: 1em;
 }
 
-.controls {
-    
-}
-
 button {
     background-color: black;
     border: 1px solid white;
     border-radius: 0.25em;
     padding: 1em;
+}
+
+#newtap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5em;
 }

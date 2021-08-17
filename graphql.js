@@ -136,6 +136,10 @@ export const root = {
     editTap: async (args) => {
         const r = await query("update ontap set ? where id = ?", [args, args.id]);
         return r;
+    },
+    newTap: async (args) => {
+        const r = await query("insert into ontap set ?", [args]);
+        return r;
     }
 };
 

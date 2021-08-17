@@ -94,8 +94,11 @@ p {
 
 #onTap {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
 
 .tap {
@@ -153,5 +156,15 @@ footer {
 
     nav a {
         font-size: 0.75em;
+    }
+
+    #onTap {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tap {
+        width: 50%;
     }
   }

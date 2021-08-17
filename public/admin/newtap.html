@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>New Tap</title>
+</head>
+
+<body>
+    <div id="profile">
+        <p id="username">Loading...</p>
+        <a href="#">Log Out</a>
+    </div>
+    <nav>
+        <div class="nav-container">
+            <a href="#">Edit Taps</a>
+            <a href="#">New Event</a>
+            <a href="#">Edit Events</a>
+        </div>
+    </nav>
+    <header>
+        <h1>New Tap</h1>
+    </header>
+    <main>
+        <form id="newtap">
+            <label>Tap / Beer Name *</label><input id="tapname" type="text" placeholder="Tap Name" />
+            <label>Brewer *</label><input id="brewer" type="text" placeholder="Brewed By" />
+            <label>Price *</label><input id="price" type="text" placeholder="Price" />
+            <label>ABV</label><input id="abv" type="text" placeholder="ABV" />
+            <label>IBU</label><input id="ibu" type="text" placeholder="IBU" />
+            <label>Ounces</label><input id="size" type="text" placeholder="Ounces" value="16" />
+            <label>Active Now</label><select id="active">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+            <label>Fields marked with * are required.</label>
+            <input type="submit" id="submit"></input>
+        </form>
+    </main>
+    <script type="module" src="./newtap.js"></script>
+</body>
+
+</html>
