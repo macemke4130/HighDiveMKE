@@ -9,6 +9,7 @@ export const schema = buildSchema(`
   type Query {
       mood: String
       allTaps(admin: Boolean): [Tap]
+      allEvents(admin: Boolean): [Event]
       tap(id: Int!): Tap
       user(username: String!, password: String!): User
       jwt(username: String!, id: Int!, admin: Boolean!): JWT
@@ -61,6 +62,20 @@ export const schema = buildSchema(`
       ibu: Int
       created: String
   }
+
+  type Event {
+      id: Int
+      title: String
+      description: String
+      eventdate: String
+      starttime: String
+      endtime: String
+      price: String
+      eventlink: String
+      ticketlink: String
+      createdat: String
+
+  }
 `);
 
 export const root = {
@@ -73,6 +88,16 @@ export const root = {
             return r;
         } else {
             const r = await query("select * from ontap where active = 1");
+            return r;
+        }
+    },
+    allEvents: async (args) => {
+        if (args.admin) {
+            const r = await query("select * from events");
+            return r;
+        } else {
+            // Public View --
+            const r = await query("select * from events where eventdate >= now() order by eventdate");
             return r;
         }
     },

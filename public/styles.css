@@ -96,7 +96,7 @@ p {
     font-family: 'Raleway', sans-serif;
 }
 
-#onTap {
+#onTap, #events {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

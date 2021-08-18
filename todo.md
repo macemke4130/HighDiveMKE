@@ -2,11 +2,15 @@
 - Are you over 21?
 - Background is black because bars are dark
 - Homepage Takeover option to takeover tap list
+- Events
+    - Events Details Page
+    - Photo? Maybe
+    - 
 - Contact
     - General
     - Booking
 - Admin
-    - Styles for login
+    - Styles for login - Maybe get rid of link completely?
     - Log Out Function
     - Buttons and UI for nav
     - New Tap Validation

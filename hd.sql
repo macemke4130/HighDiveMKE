@@ -34,7 +34,7 @@ insert into ontap (active, tapname, brewer, price, abv, ibu) values (
 insert into ontap (active, tapname, brewer, price, abv, ibu) values (
 1, "Fixed Gear", "Lakefront Brewery", "5", 6.5, 54
 );
-select * from ontap;
+select * from ontap order by active desc;
 
 drop table events;
 create table events (
@@ -44,11 +44,12 @@ create table events (
     eventdate date,
     starttime time,
     endtime time,
-    price decimal(4, 2),
-    link varchar(1000),
+    price varchar(120),
+    eventlink varchar(1000),
+    ticketlink varchar(1000),
     createdat timestamp default now() 
 );
-insert into events (title, description, eventdate, starttime, endtime, price, link) values (
-"Jason's Birthday", "He lived another year! Some bands will play", "2021-12-15", "13:15:00", "19:30:00", 10, "Facebook Link"
+insert into events (title, description, eventdate, starttime, endtime, price, eventlink, ticketlink) values (
+"Jason's Birthday", "He lived another year! Some bands will play", "2020-12-15", "13:15:00", "19:30:00", "10", "Facebook Link", "Ticket Link"
 );
-select * from events;
+select * from events where eventdate >= now() order by eventdate;
