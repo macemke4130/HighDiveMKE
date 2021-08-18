@@ -13,7 +13,6 @@ h1 {
 }
 
 h1, h2 {
-    font-family: 'Recursive', sans-serif;
     margin-top: 0.5em;
 }
 
@@ -21,6 +20,11 @@ h1, h2, header p {
     font-family: 'Recursive', sans-serif;
     font-size: 1.5em;
     text-shadow: 0 0 0.1em black, 0 0 0.1em black, 0 0 0.1em black;
+}
+
+h3 {
+    font-family: 'Recursive', sans-serif;
+    font-size: 1.5em;
 }
 
 nav {
@@ -101,7 +105,14 @@ p {
     width: 100%;
 }
 
-.tap {
+#specials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.tap, #mojito {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,6 +123,10 @@ p {
     border-radius: 0.5em;
     padding: 1em;
     box-shadow: 0.25em 0.25em 0 white;
+}
+
+#mojito {
+    width: 50%;
 }
 
 .tapName {
@@ -135,6 +150,12 @@ p {
 footer {
     position: absolute;
     bottom: 0;
+}
+
+footer a {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8em;
+    margin: 0.5em;
 }
 
 @media only screen and (max-width: 730px) {

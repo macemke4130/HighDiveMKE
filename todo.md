@@ -2,8 +2,14 @@
 - Are you over 21?
 - Background is black because bars are dark
 - Homepage Takeover option to takeover tap list
+- Contact
+    - General
+    - Booking
 - Admin
     - Styles for login
+    - Log Out Function
+    - Buttons and UI for nav
+    - New Tap Validation
 - What should I drink?
     - Chooses drink for you
     - Spin again

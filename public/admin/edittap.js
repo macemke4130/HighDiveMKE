@@ -21,6 +21,10 @@ let active = document.getElementById("active");
 
 const editTap = async (e) => {
     e.preventDefault();
+
+    const check = validate();
+    if (check === false) return;
+
     // Prevents endless "16" entries into the DB --
     const sizeCatch = size.value === "16" || size.value === "" ? null : size.value;
 
@@ -31,7 +35,6 @@ const editTap = async (e) => {
 const getTap = async () => {
     const r = await gql(`{ tap(id: ${id}) { tapname, brewer, price, abv, ibu, size, active } }`, "admin");
     const tap = r.tap;
-    console.log(tap);
 
     tapName.value = tap.tapname;
     brewer.value = tap.brewer;
@@ -42,6 +45,21 @@ const getTap = async () => {
     active.value = tap.active;
 }
 
+const validate = () => {
+    if (tapName.value === "") {
+        tapName.style.border = "5px solid red";
+        return false;
+    }
+    if (brewer.value === "") {
+        brewer.style.border = "5px solid red";
+        return false;
+    }
+    if (price.value === "") {
+        price.style.border = "5px solid red";
+        return false;
+    }
+    return true;
+}
 
 document.getElementById("edittap").onsubmit = editTap;
 document.getElementById("submit").onclick = editTap;

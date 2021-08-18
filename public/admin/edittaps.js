@@ -1,4 +1,4 @@
-import { gql, auth } from "../utils.js";
+import { gql, auth, logOut } from "../utils.js";
 
 let whoIs;
 const loggedIn = async () => {
@@ -57,6 +57,8 @@ const app = async () => {
         main.appendChild(tapRow);
     }
 }
+
+document.getElementById("logout").onclick = logOut;
 
 loggedIn();
 

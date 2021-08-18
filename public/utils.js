@@ -3,7 +3,6 @@ export const gql = async (ask, path = "public") => {
     let method = "POST";
     let headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
     let body = JSON.stringify({ query });
-    console.log(body);
     
     const graphqlPath = (path === "admin") ? "../graphql" : "./graphql";
 
@@ -34,4 +33,9 @@ export const auth = async () => {
     }
 
     return authObject;
+}
+
+export const logOut = () => {
+    localStorage.removeItem("Token");
+    window.location.href = "../";
 }
