@@ -112,7 +112,7 @@ p {
     width: 100%;
 }
 
-.tap, #mojito {
+.tap, .event,  #mojito {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -129,11 +129,11 @@ p {
     width: 50%;
 }
 
-.tapName {
+.tapName, .eventTitle {
     font-size: 1.5em;
 }
 
-.brewer {
+.brewer, .eventdate {
     font-size: 0.8em;
     margin-bottom: 0.25em;
 }
@@ -143,7 +143,7 @@ p {
     margin-bottom: 0.25em;
 }
 
-.tapDetails {
+.tapDetails, .eventDetails {
     font-size: 0.75em;
 }
 

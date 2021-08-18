@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const gql = async (ask, path = "public") => {
     let query = ask;
     let method = "POST";
@@ -38,4 +40,8 @@ export const auth = async () => {
 export const logOut = () => {
     localStorage.removeItem("Token");
     window.location.href = "../";
+}
+
+export const df = () => {
+
 }
