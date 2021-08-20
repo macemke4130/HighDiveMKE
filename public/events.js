@@ -2,7 +2,6 @@ console.log("Created by Lucas Mace");
 console.log("lucasmace4130@gmail.com");
 
 import { gql } from "./utils.js";
-import dayjs from "dayjs";
 
 const getAllEvents = async () => {
     const r = await gql(`{ allEvents { title, eventdate, starttime, price }}`);
@@ -25,8 +24,7 @@ const getAllEvents = async () => {
         // Create Event Date Text --
         let eventdate = document.createElement("p");
         eventdate.className = "eventdate";
-        const format = dayjs(allEvents[i].eventdate).format("MMM/DD/YYY");
-        eventdate.innerText = format;
+        eventdate.innerText = allEvents[i].eventdate;
         eventDiv.appendChild(eventdate);
 
         // Create Price Text --

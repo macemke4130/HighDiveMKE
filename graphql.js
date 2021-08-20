@@ -2,6 +2,7 @@ import { buildSchema } from 'graphql';
 import { query } from "./dbconnect.js";
 import * as jsonwebtoken from 'jsonwebtoken';
 import config from './config/index.js';
+import dayjs from 'dayjs';
 
 const privateKey = config.keys.jwt;
 
@@ -83,23 +84,28 @@ export const root = {
         return "Bottoms Up."
     },
     allTaps: async (args) => {
+        let r;
         if (args.admin) {
-            const r = await query("select * from ontap order by active desc, tapname asc");
-            return r;
+            r = await query("select * from ontap order by active desc, tapname asc");
         } else {
-            const r = await query("select * from ontap where active = 1");
-            return r;
+            r = await query("select * from ontap where active = 1");
         }
+        return r;
     },
     allEvents: async (args) => {
+        let r;
         if (args.admin) {
-            const r = await query("select * from events");
-            return r;
+            // Admin View with past events --
+            r = await query("select * from events");
         } else {
             // Public View --
-            const r = await query("select * from events where eventdate >= now() order by eventdate");
-            return r;
+            r = await query("select * from events where eventdate >= now() order by eventdate");
         }
+        for (let i = 0; i < r.length; i++) {
+            const dateFormat = dayjs(r[i].eventdate).format("MMM DD, YYYY");
+            r[i].eventdate = dateFormat;
+        }
+        return r;
     },
     tap: async (args) => {
         const r = await query("select * from ontap where id = ?", [args.id]);
