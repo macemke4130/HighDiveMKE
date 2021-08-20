@@ -84,23 +84,16 @@ export const root = {
         return "Bottoms Up."
     },
     allTaps: async (args) => {
-        let r;
-        if (args.admin) {
-            r = await query("select * from ontap order by active desc, tapname asc");
-        } else {
-            r = await query("select * from ontap where active = 1");
-        }
+        const r = args.admin ?
+        await query("select * from ontap order by active desc, tapname asc") : 
+        await query("select * from ontap where active = 1");
         return r;
     },
     allEvents: async (args) => {
-        let r;
-        if (args.admin) {
-            // Admin View with past events --
-            r = await query("select * from events");
-        } else {
-            // Public View --
-            r = await query("select * from events where eventdate >= now() order by eventdate");
-        }
+        const r = args.admin ?
+        await query("select * from events") :
+        await query("select * from events where eventdate >= now() order by eventdate");
+
         for (let i = 0; i < r.length; i++) {
             const dateFormat = dayjs(r[i].eventdate).format("MMM DD, YYYY");
             r[i].eventdate = dateFormat;
