@@ -1,5 +1,6 @@
 # Still To Do
 - Are you over 21?
+- Can my gql args be an object with a gql type so i don't need really long gql calls?
 - Background is black because bars are dark
 - Homepage Takeover option to takeover tap list
 - Events

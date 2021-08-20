@@ -13,7 +13,7 @@ const getAllEvents = async () => {
     for (let i = 0; i < allEvents.length; i++) {
         // Create Div for Event --
         let eventDiv = document.createElement("div");
-        eventDiv.className = "eventTitle";
+        eventDiv.className = "event";
 
         // Create Event Title Text --
         let eventTitle = document.createElement("p");
@@ -27,6 +27,12 @@ const getAllEvents = async () => {
         eventdate.innerText = allEvents[i].eventdate;
         eventDiv.appendChild(eventdate);
 
+        // Create Start Time Text --
+        let startTime = document.createElement("p");
+        startTime.className = "eventDetails";
+        startTime.innerText = allEvents[i].starttime;
+        eventDiv.appendChild(startTime);
+
         // Create Price Text --
         let price = document.createElement("p");
         price.className = "price";
@@ -34,12 +40,6 @@ const getAllEvents = async () => {
         const output = allEvents[i].price.charAt(0) === "$" ? allEvents[i].price : "$" + allEvents[i].price;
         price.innerText = output;
         eventDiv.appendChild(price);
-
-        // Create Start Time Text --
-        let startTime = document.createElement("p");
-        startTime.className = "eventDetails";
-        startTime.innerText = allEvents[i].starttime;
-        eventDiv.appendChild(startTime);
 
         // Modify DOM --
         events.appendChild(eventDiv);
