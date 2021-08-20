@@ -5,7 +5,6 @@
 - Events
     - Events Details Page
     - Photo? Maybe
-    - Convert DAYJS time format on the back end from the GraphQL resolvers
 - Contact
     - General
     - Booking

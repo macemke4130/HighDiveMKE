@@ -3,6 +3,7 @@ import { query } from "./dbconnect.js";
 import * as jsonwebtoken from 'jsonwebtoken';
 import config from './config/index.js';
 import dayjs from 'dayjs';
+import { timeConvert } from './time.js';
 
 const privateKey = config.keys.jwt;
 
@@ -97,6 +98,7 @@ export const root = {
         for (let i = 0; i < r.length; i++) {
             const dateFormat = dayjs(r[i].eventdate).format("MMM DD, YYYY");
             r[i].eventdate = dateFormat;
+            r[i].starttime = timeConvert(r[i].starttime);
         }
         return r;
     },
