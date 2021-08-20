@@ -53,3 +53,4 @@ insert into events (title, description, eventdate, starttime, endtime, price, ev
 "Jason's Birthday", "He lived another year! Some bands will play", "2020-12-15", "13:15:00", "19:30:00", "10", "Facebook Link", "Ticket Link"
 );
 select * from events where eventdate >= now() order by eventdate;
+select * from events;
