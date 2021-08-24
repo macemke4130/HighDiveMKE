@@ -10,6 +10,7 @@
     - General
     - Booking
 - Admin
+    - Put logic for "Hi Jason" inside of auth() function?
     - Styles for login - Maybe get rid of link completely?
     - Log Out Function
     - Buttons and UI for nav

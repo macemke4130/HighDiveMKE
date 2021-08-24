@@ -109,4 +109,9 @@ button {
     flex-direction: column;
     align-items: center;
     margin-top: 0.5em;
+    width: 70%;
+}
+
+#description {
+    width: 100%;
 }

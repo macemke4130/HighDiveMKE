@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
-    <title>New Tap</title>
+    <title>New Event</title>
 </head>
 
 <body>
@@ -29,15 +29,13 @@
             <label>Start Time *</label><input id="starttime" type="time" />
             <label>End Time</label><input id="endtime" type="time" />
             <label>Price *</label><input id="price" type="number" placeholder="Price" />
-            <small>If event is free, leave blank or enter 0.</small>
+            <small>If event is free enter 0.</small>
             <label>Event Link</label><input id="eventlink" type="text" placeholder="Event Link" />
-            <small>Facebook Event if wanted.</small>
-            <label>IBU</label><input id="ibu" type="text" placeholder="IBU" />
-            <label>Ounces</label><input id="size" type="text" placeholder="Ounces" value="16" />
-            <label>Active Now</label><select id="active">
-                <option value="true">Active</option>
-                <option value="false">Inactive</option>
-            </select>
+            <small>Facebook (or similar) event link if wanted.</small>
+            <label>Ticket Link</label><input id="ticketlink" type="text" placeholder="Ticket Link" />
+            <small>Where to buy tickets if applicable.</small>
+            <label>Event Description</label>
+            <textarea id="description" placeholder="Who What Why?" rows="5"></textarea>
             <label>Fields marked with * are required.</label>
             <input type="submit" id="submit"></input>
         </form>
