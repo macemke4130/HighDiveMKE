@@ -1,17 +1,35 @@
 import { gql, auth, logOut } from "../utils.js";
 
-let whoIs;
-const loggedIn = async () => {
-    whoIs = await auth();
-    document.getElementById("username").innerText = "Hi " + whoIs.username.charAt(0).toUpperCase() + whoIs.username.slice(1);
-}
+const whoIs = auth();
 
-const newEvent = (e) => {
+let title = document.getElementById("title");
+let eventdate = document.getElementById("eventdate");
+let starttime = document.getElementById("starttime");
+let endtime = document.getElementById("endtime");
+let price = document.getElementById("price");
+let eventlink = document.getElementById("eventlink");
+let ticketlink = document.getElementById("ticketlink");
+let description = document.getElementById("description");
+
+const newEvent = async (e) => {
     e.preventDefault();
-    console.log(document.getElementById("eventdate").value);
+
+    const r = await gql(` { 
+        newEvent
+        (
+        title: "${title.value}", 
+        eventdate: "${eventdate.value}", 
+        starttime: "${starttime.value}", 
+        endtime: "${endtime.value}", 
+        price: "${price.value}",
+        eventlink: "${eventlink.value}",
+        ticketlink: "${ticketlink.value}",
+        description: "${description.value}" 
+        )
+        { insertId } }`, "admin");
+
+    console.log(r);
 }
 
 document.getElementById("newevent").onsubmit = newEvent;
 document.getElementById("submit").onclick = newEvent;
-
-loggedIn();

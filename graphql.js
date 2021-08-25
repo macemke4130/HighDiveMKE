@@ -21,6 +21,8 @@ export const schema = buildSchema(`
   type Mutation {
       newTap(active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
       editTap(id: Int!, active: Boolean!, tapname: String, brewer: String, price: String, size: Int, abv: Float, ibu: Int): mysqlResponse
+      newEvent(id: Int, title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
+      newEvent2(input: EventInput): mysqlResponse
   }
 
   type mysqlResponse {
@@ -76,8 +78,12 @@ export const schema = buildSchema(`
       eventlink: String
       ticketlink: String
       createdat: String
-
   }
+
+  input EventInput {
+    title: String
+    price: String
+}
 `);
 
 export const root = {
@@ -103,6 +109,7 @@ export const root = {
         return r;
     },
     tap: async (args) => {
+        // Am I using this? --
         const r = await query("select * from ontap where id = ?", [args.id]);
         return r[0];
     },
@@ -165,6 +172,16 @@ export const root = {
     },
     newTap: async (args) => {
         const r = await query("insert into ontap set ?", [args]);
+        return r;
+    },
+    newEvent: async (args) => {
+        console.log(args);
+        const r = await query("insert into events set ?", [args]);
+        return r;
+    },
+    newEvent2: async (args) => {
+        console.log(args);
+        const r = await query("insert into events set ?", [args]);
         return r;
     }
 };
