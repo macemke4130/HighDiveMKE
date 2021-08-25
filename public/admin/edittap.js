@@ -1,15 +1,10 @@
 import { gql, auth } from "../utils.js";
 
+const whoIs = auth();
+
 const params = window.location.search;
 const paramsList = params.split("id=");
 const id = paramsList[1].split("&")[0];
-
-let whoIs;
-const loggedIn = async () => {
-    whoIs = await auth();
-    document.getElementById("username").innerText = "Hi " + whoIs.username.charAt(0).toUpperCase() + whoIs.username.slice(1);
-    getTap();
-}
 
 let tapName = document.getElementById("tapname");
 let brewer = document.getElementById("brewer");
@@ -28,7 +23,19 @@ const editTap = async (e) => {
     // Prevents endless "16" entries into the DB --
     const sizeCatch = size.value === "16" || size.value === "" ? null : size.value;
 
-    const r = await gql(`mutation { editTap(id: ${id}, active: ${active.value}, tapname: "${tapName.value}", brewer: "${brewer.value}", price: "${price.value}", size: ${sizeCatch}, abv: ${abv.value || null}, ibu: ${ibu.value || null}) { affectedRows } }`, "admin");
+    const r = await gql(`mutation { 
+        editTap
+        (
+            id: ${id}, 
+            active: ${active.value}, 
+            tapname: "${tapName.value}", 
+            brewer: "${brewer.value}", 
+            price: "${price.value}", 
+            size: ${sizeCatch}, 
+            abv: ${abv.value || null}, 
+            ibu: ${ibu.value || null}
+        ) 
+            { affectedRows } }`, "admin");
     if (r) window.location.href = "./edittaps.html";
 }
 
@@ -46,22 +53,24 @@ const getTap = async () => {
 }
 
 const validate = () => {
+    const red = "5px solid red";
+
     if (tapName.value === "") {
-        tapName.style.border = "5px solid red";
+        tapName.style.border = red;
         return false;
     }
     if (brewer.value === "") {
-        brewer.style.border = "5px solid red";
+        brewer.style.border = red;
         return false;
     }
     if (price.value === "") {
-        price.style.border = "5px solid red";
+        price.style.border = red;
         return false;
     }
     return true;
 }
 
+getTap();
+
 document.getElementById("edittap").onsubmit = editTap;
 document.getElementById("submit").onclick = editTap;
-
-loggedIn();

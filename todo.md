@@ -4,6 +4,7 @@
 - Background is black because bars are dark
 - Homepage Takeover option to takeover tap list
 - Events
+    - Add auto TOnight! or TOmorrow Night! Logic for eventdate
     - Events Details Page
     - Photo? Maybe
 - Contact

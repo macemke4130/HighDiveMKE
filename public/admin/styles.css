@@ -113,9 +113,14 @@ button {
 }
 
 #description {
+    color: black;
     width: 100%;
 }
 
 #eventtitle, #eventlink, #ticketlink {
     width: 25em;
+}
+
+small {
+    font-size: 0.7em;
 }

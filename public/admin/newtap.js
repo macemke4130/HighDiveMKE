@@ -1,10 +1,6 @@
 import { gql, auth, logOut } from "../utils.js";
 
-let whoIs;
-const loggedIn = async () => {
-    whoIs = await auth();
-    document.getElementById("username").innerText = "Hi " + whoIs.username.charAt(0).toUpperCase() + whoIs.username.slice(1);
-}
+const whoIs = auth();
 
 let tapName = document.getElementById("tapname");
 let brewer = document.getElementById("brewer");
@@ -52,5 +48,3 @@ const validate = () => {
 document.getElementById("newtap").onsubmit = newTap;
 document.getElementById("submit").onclick = newTap;
 document.getElementById("logout").onclick = logOut;
-
-loggedIn();

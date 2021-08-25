@@ -1,11 +1,6 @@
 import { gql, auth, logOut } from "../utils.js";
 
-let whoIs;
-const loggedIn = async () => {
-    whoIs = await auth();
-    document.getElementById("username").innerText = "Hi " + whoIs.username.charAt(0).toUpperCase() + whoIs.username.slice(1);
-    app();
-}
+const whoIs = auth();
 
 const app = async () => {
     const r = await gql(`{ allTaps(admin: true) { id, tapname, active } }`, "admin");
@@ -58,7 +53,6 @@ const app = async () => {
     }
 }
 
+app();
+
 document.getElementById("logout").onclick = logOut;
-
-loggedIn();
-
