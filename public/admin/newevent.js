@@ -14,6 +14,9 @@ let description = document.getElementById("description");
 const newEvent = async (e) => {
     e.preventDefault();
 
+    const check = validate();
+    if (check === false) return;
+   
     // Add seconds for mysql Format --
     const starttimeCatch = starttime.value + ":00";
     const endtimeCatch = endtime.value + ":00";
@@ -36,7 +39,18 @@ const newEvent = async (e) => {
 }
 
 const validate = () => {
+    const required = [title, eventdate, starttime, price];
+    const red = "5px solid red";
 
+    for (let i = 0; i < required.length; i++) {
+        if (required[i].value === "" || required[i].value === undefined) {
+            required[i].style.border = red;
+            return false;
+        } else {
+            required[i].style.border = "none";
+        }
+    }
+    return true;
 }
 
 document.getElementById("newevent").onsubmit = newEvent;

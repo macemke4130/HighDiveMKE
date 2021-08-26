@@ -53,19 +53,16 @@ const getTap = async () => {
 }
 
 const validate = () => {
+    const required = [tapName, brewer, price];
     const red = "5px solid red";
 
-    if (tapName.value === "") {
-        tapName.style.border = red;
-        return false;
-    }
-    if (brewer.value === "") {
-        brewer.style.border = red;
-        return false;
-    }
-    if (price.value === "") {
-        price.style.border = red;
-        return false;
+    for (let i = 0; i < required.length; i++) {
+        if (required[i].value === "" || required[i].value === undefined) {
+            required[i].style.border = red;
+            return false;
+        } else {
+            required[i].style.border = "none";
+        }
     }
     return true;
 }

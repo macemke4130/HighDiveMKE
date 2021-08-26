@@ -24,23 +24,16 @@ const newTap = async (e) => {
 }
 
 const validate = () => {
-    if (tapName.value === "") {
-        tapName.style.border = "5px solid red";
-        return false;
-    } else {
-        tapName.style.border = "none";
-    }
-    if (brewer.value === "") {
-        brewer.style.border = "5px solid red";
-        return false;
-    } else {
-        brewer.style.border = "none";
-    }
-    if (price.value === "") {
-        price.style.border = "5px solid red";
-        return false;
-    } else {
-        price.style.border = "none";
+    const required = [tapName, brewer, price];
+    const red = "5px solid red";
+
+    for (let i = 0; i < required.length; i++) {
+        if (required[i].value === "" || required[i].value === undefined) {
+            required[i].style.border = red;
+            return false;
+        } else {
+            required[i].style.border = "none";
+        }
     }
     return true;
 }
