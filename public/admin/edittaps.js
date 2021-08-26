@@ -5,7 +5,6 @@ const whoIs = auth();
 const app = async () => {
     const r = await gql(`{ allTaps(admin: true) { id, tapname, active } }`, "admin");
     const allTaps = r.allTaps;
-    console.log(allTaps);
     
     // Input Source for Dom Manipulation --
     const main = document.getElementById("allTaps");

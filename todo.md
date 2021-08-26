@@ -5,17 +5,18 @@
 - Homepage Takeover option to takeover tap list
 - Events
     - Add auto TOnight! or TOmorrow Night! Logic for eventdate
+    - Needs Day of Week logic for eventdate
     - Events Details Page
     - Photo? Maybe
+    - When do events clear from the client side?
 - Contact
     - General
     - Booking
 - Admin
-    - Put logic for "Hi Jason" inside of auth() function?
+    - Log Out positon for mobile
+    - If LS.Message is not null, display message above login screen "Invalid Authentication Token", "Logged Out"...
     - Styles for login - Maybe get rid of link completely?
-    - Log Out Function
     - Buttons and UI for nav
-    - New Tap Validation
 - What should I drink?
     - Chooses drink for you
     - Spin again

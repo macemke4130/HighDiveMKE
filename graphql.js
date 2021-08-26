@@ -21,8 +21,9 @@ export const schema = buildSchema(`
   type Mutation {
       newTap(active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
       editTap(id: Int!, active: Boolean!, tapname: String, brewer: String, price: String, size: Int, abv: Float, ibu: Int): mysqlResponse
-      newEvent(id: Int, title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
-  }
+      newEvent(title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
+      editEvent(id: Int, title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
+    }
 
   type mysqlResponse {
     fieldCount: Int
@@ -78,11 +79,6 @@ export const schema = buildSchema(`
       ticketlink: String
       createdat: String
   }
-
-  input EventInput {
-    title: String
-    price: String
-}
 `);
 
 export const root = {
@@ -97,7 +93,7 @@ export const root = {
     },
     allEvents: async (args) => {
         const r = args.admin ?
-        await query("select * from events") :
+        await query("select * from events order by eventdate asc") :
         await query("select * from events where eventdate >= now() order by eventdate");
 
         for (let i = 0; i < r.length; i++) {
@@ -174,8 +170,11 @@ export const root = {
         return r;
     },
     newEvent: async (args) => {
-        console.log(args);
         const r = await query("insert into events set ?", [args]);
+        return r;
+    },
+    editEvent: async (args) => {
+        const r = await query("update events set ? where id = ?", [args, args.id]);
         return r;
     }
 };
