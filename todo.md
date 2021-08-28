@@ -4,8 +4,8 @@
 - Background is black because bars are dark
 - Homepage Takeover option to takeover tap list
 - Events
+    - Delete Event
     - Add auto TOnight! or TOmorrow Night! Logic for eventdate
-    - Needs Day of Week logic for eventdate
     - Events Details Page
     - Photo? Maybe
     - When do events clear from the client side?

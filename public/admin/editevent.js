@@ -16,7 +16,7 @@ let ticketlink = document.getElementById("ticketlink");
 let description = document.getElementById("description");
 
 const getEvent = async () => {
-    const r = await gql(`{ event(id: ${id}) {
+    const r = await gql(`{ event(id: ${id}, admin: true) {
           title,
           eventdate,
           starttime,
@@ -30,8 +30,66 @@ const getEvent = async () => {
       `, "admin");
     const event = r.event;
     console.log(event);
-
+    
+    title.value = event.title;
     eventdate.value = event.eventdate;
+    starttime.value = event.starttime;
+    endtime.value = event.endtime;
+    price.value = event.price;
+    eventlink.value = event.eventlink;
+    ticketlink.value = event.ticketlink;
+    description.value = event.description;
+}
+
+const editEvent = async (e) => {
+    e.preventDefault();
+
+    const check = validate();
+    if (check === false) return;
+
+    const endtimeCatch = endtime.value === "" ? null : `"${endtime.value}"`;
+
+    const r = await gql(` mutation { 
+        editEvent
+        (
+        id: ${id},
+        title: "${title.value}", 
+        eventdate: "${eventdate.value}", 
+        starttime: "${starttime.value}", 
+        endtime: ${endtimeCatch}, 
+        price: "${price.value}",
+        eventlink: "${eventlink.value}",
+        ticketlink: "${ticketlink.value}",
+        description: "${description.value}" 
+        )
+        { affectedRows } }`, "admin");
+        console.log(r);
+
+    if (r) window.location.href = "./editevents.html";
+}
+
+const validate = () => {
+    const required = [title, eventdate, starttime, price];
+    const red = "5px solid red";
+
+    for (let i = 0; i < required.length; i++) {
+        if (required[i].value === "" || required[i].value === undefined) {
+            required[i].style.border = red;
+            return false;
+        } else {
+            required[i].style.border = "none";
+        }
+    }
+    return true;
+}
+
+const resetEndTime = (e) => {
+    e.preventDefault();
+    endtime.value = null;
 }
 
 getEvent();
+
+document.getElementById("editevent").onsubmit = editEvent;
+document.getElementById("submit").onclick = editEvent;
+document.getElementById("resetEndTime").onclick = resetEndTime;

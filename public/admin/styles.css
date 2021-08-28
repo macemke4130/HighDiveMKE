@@ -102,6 +102,22 @@ button {
     padding: 1em;
 }
 
+#time-control {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#time-control button {
+    margin: 0.25em;
+}
+
+.danger {
+    background-color: red;
+    color: black;
+    margin-top: 3em;
+}
+
 #newtap, #edittap, #newevent, #editevent {
     display: flex;
     flex-direction: column;
@@ -121,6 +137,7 @@ button {
 
 small {
     font-size: 0.7em;
+    text-align: center;
 }
 
 @media only screen and (max-width: 730px) {

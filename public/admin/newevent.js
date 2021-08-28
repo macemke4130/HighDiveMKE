@@ -14,20 +14,19 @@ let description = document.getElementById("description");
 const newEvent = async (e) => {
     e.preventDefault();
 
-    const check = validate();
-    if (check === false) return;
-   
-    // Add seconds for mysql Format --
-    const starttimeCatch = starttime.value + ":00";
-    const endtimeCatch = endtime.value + ":00";
+    // const check = validate();
+    // if (check === false) return;
+
+    //
+    const endtimeCatch = endtime.value === "" ? null : `"${endtime.value}"`;
 
     const r = await gql(` mutation { 
         newEvent
         (
         title: "${title.value}", 
         eventdate: "${eventdate.value}", 
-        starttime: "${starttimeCatch}", 
-        endtime: "${endtimeCatch}", 
+        starttime: "${starttime.value}", 
+        endtime: ${endtimeCatch}, 
         price: "${price.value}",
         eventlink: "${eventlink.value}",
         ticketlink: "${ticketlink.value}",
@@ -36,7 +35,9 @@ const newEvent = async (e) => {
         { insertId } }`, "admin");
         console.log(r);
 
-    // if (r) window.location.href = "./editevents.html";
+    if (r) window.location.href = "./editevents.html";
+
+    console.log(endtime.value);
 }
 
 const validate = () => {
@@ -54,5 +55,11 @@ const validate = () => {
     return true;
 }
 
+const resetEndTime = (e) => {
+    e.preventDefault();
+    endtime.value = null;
+}
+
 document.getElementById("newevent").onsubmit = newEvent;
 document.getElementById("submit").onclick = newEvent;
+document.getElementById("resetEndTime").onclick = resetEndTime;

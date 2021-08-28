@@ -27,7 +27,12 @@
             <label>Event Title *</label><input id="eventtitle" type="text" placeholder="Event Title" />
             <label>Event Date *</label><input id="eventdate" type="date" />
             <label>Start Time *</label><input id="starttime" type="time" />
-            <label>End Time</label><input id="endtime" type="time" />
+            <label>End Time</label>
+            <small>Leave Blank or Reset for events without end time.</small>
+            <div>
+                <input id="endtime" type="time" />
+                <button id="resetEndTime">Reset End Time</button>
+            </div>
             <label>Price *</label>
             <small>If event is free enter 0.</small>
             <input id="price" type="number" placeholder="Price" />

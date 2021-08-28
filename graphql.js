@@ -23,7 +23,7 @@ export const schema = buildSchema(`
       newTap(active: Boolean!, tapname: String!, brewer: String!, price: String!, size: Int, abv: Float, ibu: Int): mysqlResponse
       editTap(id: Int!, active: Boolean!, tapname: String, brewer: String, price: String, size: Int, abv: Float, ibu: Int): mysqlResponse
       newEvent(title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
-      editEvent(id: Int, title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
+      editEvent(id: Int!, title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
     }
 
   type mysqlResponse {
