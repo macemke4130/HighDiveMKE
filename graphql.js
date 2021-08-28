@@ -13,6 +13,7 @@ export const schema = buildSchema(`
       allTaps(admin: Boolean): [Tap]
       allEvents(admin: Boolean): [Event]
       tap(id: Int!): Tap
+      event(id: Int!, admin: Boolean): Event
       user(username: String!, password: String!): User
       jwt(username: String!, id: Int!, admin: Boolean!): JWT
       auth(token: String!): AuthObject
@@ -97,7 +98,7 @@ export const root = {
         await query("select * from events where eventdate >= now() order by eventdate");
 
         for (let i = 0; i < r.length; i++) {
-            const dateFormat = dayjs(r[i].eventdate).format("MMM DD, YYYY");
+            const dateFormat = dayjs(r[i].eventdate).format("dddd, MMM DD, YYYY");
             r[i].eventdate = dateFormat;
             r[i].starttime = timeConvert(r[i].starttime);
         }
@@ -106,6 +107,14 @@ export const root = {
     tap: async (args) => {
         // Am I using this? --
         const r = await query("select * from ontap where id = ?", [args.id]);
+        return r[0];
+    },
+    event: async (args) => {
+        const r = await query("select * from events where id = ?", [args.id]);
+        const dateFormat = args.admin ?
+        dayjs(r[0].eventdate).format("YYYY-MM-DD") :
+        dayjs(r[0].eventdate).format("dddd, MMM DD, YYYY");
+        r[0].eventdate = dateFormat;
         return r[0];
     },
     user: async (args) => {

@@ -34,8 +34,9 @@ const newEvent = async (e) => {
         description: "${description.value}" 
         )
         { insertId } }`, "admin");
+        console.log(r);
 
-    if (r) window.location.href = "./editevents.html";
+    // if (r) window.location.href = "./editevents.html";
 }
 
 const validate = () => {
