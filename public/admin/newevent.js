@@ -14,10 +14,10 @@ let description = document.getElementById("description");
 const newEvent = async (e) => {
     e.preventDefault();
 
-    // const check = validate();
-    // if (check === false) return;
+    const check = validate();
+    if (check === false) return;
 
-    //
+    
     const endtimeCatch = endtime.value === "" ? null : `"${endtime.value}"`;
 
     const r = await gql(` mutation { 

@@ -1,3 +1,9 @@
+import dayjs from 'dayjs';
+import isTomorrow from 'dayjs/plugin/isTomorrow.js';
+import isToday from 'dayjs/plugin/isToday.js';
+dayjs.extend(isTomorrow);
+dayjs.extend(isToday);
+
 export const timeConvert = (x) => {
     let hour = Number(x.split(":")[0]);
     let minute = x.split(":")[1];
@@ -5,4 +11,16 @@ export const timeConvert = (x) => {
     if (hour >= 13) hour = hour - 12;
 
     return hour + ":" + minute + meridian;
+}
+
+export const prefixCheck = (testDate) => {
+    if (dayjs(testDate).add(0, 'day').isTomorrow()) {
+        return "Tomorrow! ";
+    }
+
+    if (dayjs(testDate).isToday()) {
+        return "Today! ";
+    }
+
+    return "";
 }

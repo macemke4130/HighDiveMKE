@@ -4,7 +4,7 @@ console.log("lucasmace4130@gmail.com");
 import { gql } from "./utils.js";
 
 const getAllEvents = async () => {
-    const r = await gql(`{ allEvents { title, eventdate, starttime, price }}`);
+    const r = await gql(`{ allEvents { id, title, eventdate, starttime, price }}`);
     const allEvents = r.allEvents;
     console.log(allEvents);
 
@@ -36,9 +36,7 @@ const getAllEvents = async () => {
         // Create Price Text --
         let price = document.createElement("p");
         price.className = "price";
-        // Needs logic for FREE events --
-        const output = allEvents[i].price.charAt(0) === "$" ? allEvents[i].price : "$" + allEvents[i].price;
-        price.innerText = output;
+        price.innerText = allEvents[i].price;
         eventDiv.appendChild(price);
 
         // Modify DOM --

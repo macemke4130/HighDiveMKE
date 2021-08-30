@@ -3,7 +3,7 @@ import { query } from "./dbconnect.js";
 import * as jsonwebtoken from 'jsonwebtoken';
 import config from './config/index.js';
 import dayjs from 'dayjs';
-import { timeConvert } from './time.js';
+import { timeConvert, prefixCheck } from './time.js';
 
 const privateKey = config.keys.jwt;
 
@@ -88,19 +88,26 @@ export const root = {
     },
     allTaps: async (args) => {
         const r = args.admin ?
-        await query("select * from ontap order by active desc, tapname asc") : 
-        await query("select * from ontap where active = 1");
+            await query("select * from ontap order by active desc, tapname asc") :
+            await query("select * from ontap where active = 1");
         return r;
     },
     allEvents: async (args) => {
         const r = args.admin ?
-        await query("select * from events order by eventdate asc") :
-        await query("select * from events where eventdate >= now() order by eventdate");
+            await query("select * from events order by eventdate asc") :
+            await query("select * from events where eventdate >= (now() + 1) order by eventdate");
+        const today = dayjs().format("dddd, MMM DD, YYYY");
 
         for (let i = 0; i < r.length; i++) {
-            const dateFormat = dayjs(r[i].eventdate).format("dddd, MMM DD, YYYY");
-            r[i].eventdate = dateFormat;
+            let dateFormat = dayjs(r[i].eventdate).format("dddd, MMM DD, YYYY");
+            r[i].eventdate = prefixCheck(r[i].eventdate) + dateFormat;
             r[i].starttime = timeConvert(r[i].starttime);
+
+            if (r[i].price === "0") {
+                r[i].price = "Free";
+            } else {
+                r[i].price = "$" + r[i].price;
+            }
         }
         return r;
     },
@@ -111,10 +118,17 @@ export const root = {
     },
     event: async (args) => {
         const r = await query("select * from events where id = ?", [args.id]);
+        const today = dayjs().format("dddd, MMM DD, YYYY");
         const dateFormat = args.admin ?
-        dayjs(r[0].eventdate).format("YYYY-MM-DD") :
-        dayjs(r[0].eventdate).format("dddd, MMM DD, YYYY");
-        r[0].eventdate = dateFormat;
+            dayjs(r[0].eventdate).format("YYYY-MM-DD") :
+            dayjs(r[0].eventdate).format("dddd, MMM DD, YYYY");
+
+        if (dateFormat === today) {
+            console.log(today);
+            r[0].eventdate = "Today! " + dateFormat;
+        } else {
+            r[0].eventdate = dateFormat
+        }
         return r[0];
     },
     user: async (args) => {
