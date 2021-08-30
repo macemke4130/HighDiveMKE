@@ -127,6 +127,19 @@ p, a {
     box-shadow: 0.25em 0.25em 0 white;
 }
 
+.buyticketsbutton {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    width: 50%;
+    margin: 1em;
+    border: 1px solid white;
+    border-radius: 0.5em;
+    padding: 1em;
+    box-shadow: 0.25em 0.25em 0 white;
+}
+
 #mojito {
     width: 50%;
 }

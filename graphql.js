@@ -119,7 +119,7 @@ export const root = {
 
         r[0].eventdate = args.admin ? dateFormat : prefixCheck(r[0].eventdate) + dateFormat;
         r[0].starttime =  args.admin ? r[0].starttime : timeConvert(r[0].starttime);
-        r[0].price = priceCheck(r[0].price);
+        r[0].price = args.admin ? r[0].price : priceCheck(r[0].price);
 
         if ( r[0].endtime ) r[0].endtime =  args.admin ?
             r[0].endtime : timeConvert(r[0].endtime);
