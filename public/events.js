@@ -6,7 +6,6 @@ import { gql } from "./utils.js";
 const getAllEvents = async () => {
     const r = await gql(`{ allEvents { id, title, eventdate, starttime, price }}`);
     const allEvents = r.allEvents;
-    console.log(allEvents);
 
     const events = document.getElementById("events");
 
@@ -38,6 +37,13 @@ const getAllEvents = async () => {
         price.className = "price";
         price.innerText = allEvents[i].price;
         eventDiv.appendChild(price);
+
+        // Create Link --
+        let link = document.createElement("a");
+        link.className = "eventDetails";
+        link.innerText = "More Details";
+        link.href = "./eventdetails.html?id=" + allEvents[i].id;
+        eventDiv.appendChild(link);
 
         // Modify DOM --
         events.appendChild(eventDiv);

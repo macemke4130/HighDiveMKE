@@ -3,7 +3,7 @@ import { query } from "./dbconnect.js";
 import * as jsonwebtoken from 'jsonwebtoken';
 import config from './config/index.js';
 import dayjs from 'dayjs';
-import { timeConvert, prefixCheck } from './time.js';
+import { timeConvert, prefixCheck, priceCheck } from './utils-backend.js';
 
 const privateKey = config.keys.jwt;
 
@@ -96,18 +96,12 @@ export const root = {
         const r = args.admin ?
             await query("select * from events order by eventdate asc") :
             await query("select * from events where eventdate >= (now() + 1) order by eventdate");
-        const today = dayjs().format("dddd, MMM DD, YYYY");
 
         for (let i = 0; i < r.length; i++) {
-            let dateFormat = dayjs(r[i].eventdate).format("dddd, MMM DD, YYYY");
+            const dateFormat = dayjs(r[i].eventdate).format("dddd, MMM DD, YYYY");
             r[i].eventdate = prefixCheck(r[i].eventdate) + dateFormat;
             r[i].starttime = timeConvert(r[i].starttime);
-
-            if (r[i].price === "0") {
-                r[i].price = "Free";
-            } else {
-                r[i].price = "$" + r[i].price;
-            }
+            r[i].price = priceCheck(r[i].price);
         }
         return r;
     },
@@ -118,17 +112,18 @@ export const root = {
     },
     event: async (args) => {
         const r = await query("select * from events where id = ?", [args.id]);
-        const today = dayjs().format("dddd, MMM DD, YYYY");
+
         const dateFormat = args.admin ?
-            dayjs(r[0].eventdate).format("YYYY-MM-DD") :
+            dayjs(r[0].eventdate).format("YYYY-MM-DD") : 
             dayjs(r[0].eventdate).format("dddd, MMM DD, YYYY");
 
-        if (dateFormat === today) {
-            console.log(today);
-            r[0].eventdate = "Today! " + dateFormat;
-        } else {
-            r[0].eventdate = dateFormat
-        }
+        r[0].eventdate = args.admin ? dateFormat : prefixCheck(r[0].eventdate) + dateFormat;
+        r[0].starttime =  args.admin ? r[0].starttime : timeConvert(r[0].starttime);
+        r[0].price = priceCheck(r[0].price);
+
+        if ( r[0].endtime ) r[0].endtime =  args.admin ?
+            r[0].endtime : timeConvert(r[0].endtime);
+
         return r[0];
     },
     user: async (args) => {

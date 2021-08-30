@@ -24,3 +24,7 @@ export const prefixCheck = (testDate) => {
 
     return "";
 }
+
+export const priceCheck = (price) => {
+    return (price === "0") ? "Free" : "$" + price;
+}
