@@ -95,15 +95,12 @@ p, a, label, h1, h2, small {
     margin-left: 1em;
 }
 
-.controls a {
-    margin: 1em;
-}
-
-button {
+button, .controls a {
     background-color: black;
     border: 1px solid white;
     border-radius: 0.25em;
-    padding: 1em;
+    padding: 0.25em;
+    text-decoration: none;
 }
 
 #time-control {
@@ -167,11 +164,12 @@ small {
         justify-content: center;
         bottom: 0;
         right: 0;
+        z-index: -1;
     }
 
     .tapName {
         font-size: 0.8em;
-        margin-left: 0;
+        margin-left: 0.5em;
     }
 
     button {
