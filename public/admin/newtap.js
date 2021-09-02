@@ -19,8 +19,8 @@ const newTap = async (e) => {
     // Prevents endless "16" entries into the DB --
     const sizeCatch = size.value === "16" || size.value === "" ? null : size.value;
 
-    const r = await gql(`mutation { newTap(active: true, tapname: "${tapName.value}", brewer: "${brewer.value}", price: "${price.value}", size: ${sizeCatch}, abv: ${abv.value || null}}, ibu: ${ibu.value || null}}) { insertId } }`, "admin");
-    console.log(r);
+    const r = await gql(`mutation { newTap(active: true, tapname: "${tapName.value}", brewer: "${brewer.value}", price: "${price.value}", size: ${sizeCatch}, abv: ${abv.value || null}}, ibu: ${ibu.value || null}) { insertId } }`, "admin");
+    if (r) window.location.href = "./edittaps.html";
 }
 
 const validate = () => {
