@@ -25,15 +25,11 @@ const app = async () => {
         let controls = document.createElement("div");
         controls.className = "controls";
         eventRow.appendChild(controls);
-
-        // Create Edit Button --
-        let editButton = document.createElement("button");
-        editButton.innerText = "Edit";
         
         // Create Edit Link -- 
         let editLink = document.createElement("a");
         editLink.href = "./editevent.html?id=" + allEvents[i].id;
-        editLink.appendChild(editButton);
+        editLink.innerText = "Edit";
         controls.appendChild(editLink);
 
         eventRow.appendChild(controls);
