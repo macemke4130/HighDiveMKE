@@ -17,16 +17,14 @@ body {
 nav {
     display: flex;
     flex-direction: row;
-    position: absolute;
-    top: 0;
-    left: 0;
+    justify-content: center;
+    width: 100%;
 }
 
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20vh;
     width: 100%;
     background-color: black;
     border-bottom: 1px solid white;
@@ -59,11 +57,7 @@ p, a, label, h1, h2, small {
 
 #profile {
     display: flex;
-    align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 0;
-    right: 0;
 }
 
 #profile p, a {
@@ -149,22 +143,12 @@ small {
     }
 
     header {
-        height: 10em;
         align-items: flex-end;
     }
 
     header h1 {
         font-size: 1.25em;
         margin-bottom: 1em;
-    }
-
-    #profile {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        bottom: 0;
-        right: 0;
-        z-index: -1;
     }
 
     .tapName {
