@@ -96,9 +96,7 @@ p, a, label, h1, h2, small {
 }
 
 .controls a {
-    border: 1px solid white;
-    border-radius: 0.25em;
-    padding: 0.5em;
+    margin: 1em;
 }
 
 button {
