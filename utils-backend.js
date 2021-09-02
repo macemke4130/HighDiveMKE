@@ -9,6 +9,7 @@ export const timeConvert = (x) => {
     let minute = x.split(":")[1];
     let meridian = (hour >= 12) ? "pm" : "am";
     if (hour >= 13) hour = hour - 12;
+    if (hour === 0) hour = 12; // Midnight --
 
     return hour + ":" + minute + meridian;
 }

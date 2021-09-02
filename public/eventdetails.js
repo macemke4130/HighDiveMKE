@@ -32,7 +32,7 @@ const getEvent = async () => {
 
     if ( event.eventlink ) {
         const eventlink = document.createElement("a");
-        eventlink.innerText = "Facebook Event";
+        eventlink.innerText = "Even More Info";
         eventlink.href = event.eventlink;
         eventlink.target = "_blank";
         eventContainer.appendChild(eventlink);
@@ -50,6 +50,7 @@ const getEvent = async () => {
     if ( event.description ) {
         const description = document.createElement("p");
         description.innerText = event.description;
+        description.className = "eventDescription";
         eventContainer.appendChild(description);
     }
 }

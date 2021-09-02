@@ -162,6 +162,15 @@ p, a {
     font-size: 0.75em;
 }
 
+.eventDescription {
+    padding: 0;
+}
+
+#event p, #event a {
+    font-size: 1.25em;
+    margin-top: 0.5em;
+}
+
 footer {
     position: absolute;
     bottom: 0;
@@ -209,5 +218,9 @@ footer a {
 
     .tap {
         width: 50%;
+    }
+
+    .eventDescription {
+        padding: 0.5em;
     }
   }

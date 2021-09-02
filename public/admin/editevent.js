@@ -88,8 +88,18 @@ const resetEndTime = (e) => {
     endtime.value = null;
 }
 
+const deleteAlert = () => {
+    if( confirm("Delete Event?") ) deleteEvent();
+}
+
+const deleteEvent = async () => {
+    const r = await gql(` mutation {deleteEvent ( id: ${id} ) { affectedRows }} `, "admin");
+    if (r) window.location.href = "./editevents.html";
+}
+
 getEvent();
 
 document.getElementById("editevent").onsubmit = editEvent;
 document.getElementById("submit").onclick = editEvent;
+document.getElementById("delete-event").onclick = deleteAlert;
 document.getElementById("resetEndTime").onclick = resetEndTime;

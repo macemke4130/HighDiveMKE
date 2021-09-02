@@ -75,7 +75,7 @@ p, a, label, h1, h2, small {
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    padding: 0.5em;
+    padding: 1em;
 }
 
 .black {
@@ -93,6 +93,12 @@ p, a, label, h1, h2, small {
 .tapName, .eventTitle {
     font-size: 1em;
     margin-left: 1em;
+}
+
+.controls a {
+    border: 1px solid white;
+    border-radius: 0.25em;
+    padding: 0.5em;
 }
 
 button {

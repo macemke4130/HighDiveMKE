@@ -24,6 +24,7 @@ export const schema = buildSchema(`
       editTap(id: Int!, active: Boolean!, tapname: String, brewer: String, price: String, size: Int, abv: Float, ibu: Int): mysqlResponse
       newEvent(title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
       editEvent(id: Int!, title: String, description: String, eventdate: String, starttime: String, endtime: String, price: String, eventlink: String, ticketlink: String): mysqlResponse
+      deleteEvent(id: Int!): mysqlResponse
     }
 
   type mysqlResponse {
@@ -193,6 +194,10 @@ export const root = {
     },
     editEvent: async (args) => {
         const r = await query("update events set ? where id = ?", [args, args.id]);
+        return r;
+    },
+    deleteEvent: async (args) => {
+        const r = await query("delete from events where id = ?", [args.id]);
         return r;
     }
 };

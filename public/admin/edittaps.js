@@ -25,26 +25,18 @@ const app = async () => {
         let controls = document.createElement("div");
         controls.className = "controls";
         tapRow.appendChild(controls);
-
-        // Create Activate Button --
-        let activeateButton = document.createElement("button");
-        activeateButton.innerText = allTaps[i].active ? "Deactivate" : "Activate";
         
         // Create Activate Link -- 
         let activateLink = document.createElement("a");
         const activatePath = "./activate.html?id=" + allTaps[i].id;
         activateLink.href = allTaps[i].active ? activatePath + "&active=false" : activatePath + "&active=true";
-        activateLink.appendChild(activeateButton);
+        activateLink.innerText = allTaps[i].active ? "Deactivate" : "Activate";
         controls.appendChild(activateLink);
-
-        // Create Edit Button --
-        let editButton = document.createElement("button");
-        editButton.innerText = "Edit";
         
         // Create Edit Link -- 
         let editLink = document.createElement("a");
         editLink.href = "./edittap.html?id=" + allTaps[i].id;
-        editLink.appendChild(editButton);
+        editLink.innerText = "Edit";
         controls.appendChild(editLink);
 
         tapRow.appendChild(controls);
