@@ -1,4 +1,4 @@
-import { gql, auth } from "../utils.js";
+import { gql, auth, logOut } from "../utils.js";
 
 const whoIs = auth();
 
@@ -71,3 +71,4 @@ getTap();
 
 document.getElementById("edittap").onsubmit = editTap;
 document.getElementById("submit").onclick = editTap;
+document.getElementById("logout").onclick = logOut;

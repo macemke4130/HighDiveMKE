@@ -63,3 +63,4 @@ const resetEndTime = (e) => {
 document.getElementById("newevent").onsubmit = newEvent;
 document.getElementById("submit").onclick = newEvent;
 document.getElementById("resetEndTime").onclick = resetEndTime;
+document.getElementById("logout").onclick = logOut;

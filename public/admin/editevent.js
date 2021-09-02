@@ -1,4 +1,4 @@
-import { gql, auth } from "../utils.js";
+import { gql, auth, logOut } from "../utils.js";
 
 const whoIs = auth();
 
@@ -103,3 +103,4 @@ document.getElementById("editevent").onsubmit = editEvent;
 document.getElementById("submit").onclick = editEvent;
 document.getElementById("delete-event").onclick = deleteAlert;
 document.getElementById("resetEndTime").onclick = resetEndTime;
+document.getElementById("logout").onclick = logOut;
